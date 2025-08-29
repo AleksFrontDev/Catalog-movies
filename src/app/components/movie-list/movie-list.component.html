@@ -1,0 +1,23 @@
+<div class="movie-list">
+  @if (isLoading) {
+    <p>Загрузка фильмов...</p>
+  }
+
+  @if (error) {
+    <div class="error">
+      Ошибка: {{ error }}
+    </div>
+  }
+
+  @if (movies$ | async; as movies) {
+    <div class="movies-container">
+      @for (movie of movies; track movie.id) {
+        <div class="movie-item">
+          <h3>{{ movie.title }}</h3>
+          <p>Год: {{ movie.year }}</p>
+          <p>Рейтинг: {{ movie.rating }}</p>
+        </div>
+      }
+    </div>
+  }
+</div>
