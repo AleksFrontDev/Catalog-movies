@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../services/movie.service';
+import { MovieService } from '../../../services/movie.service';
 import { catchError, map, Observable, of } from 'rxjs';
-import { Movie } from '../../models/movie';
+import { Movie } from '../../../models/movie';
 import { CommonModule } from '@angular/common';
 import { MovieModalComponent } from '../movie-modal/movie-modal.component';
-import { MovieSearchComponent } from "../components/movie-search/movie-search.component";
+import { MovieSearchComponent } from "../movie-search/movie-search.component";
 
 @Component({
   selector: 'app-movie-list',

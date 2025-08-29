@@ -18,9 +18,18 @@
     <div class="movies-container">
     @for (movie of movies; track movie.id) {
         <div class="movie-item" (click)="openMovieModal(movie)">
+            <div class="movie-image-container">
+              <img
+                [src]="movie.poster"
+                [alt]="movie.title"
+                class="movie-image"
+              >
+            </div>
             <h3>{{ movie.title }}</h3>
-            <p>Год: {{ movie.year }}</p>
-            <p>Рейтинг: {{ movie.rating }}</p>
+            <div class="movie-details">
+              <p class="movie-year">Год: {{ movie.year }}</p>
+              <p class="movie-rating">Рейтинг: {{ movie.rating }}</p>
+            </div>
         </div>
     }
     </div>

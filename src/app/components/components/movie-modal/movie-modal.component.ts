@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Movie } from '../../models/movie';
+import { Movie } from '../../../models/movie';
 
 @Component({
   selector: 'app-movie-modal',
