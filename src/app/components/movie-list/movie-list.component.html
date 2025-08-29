@@ -1,6 +1,11 @@
+<div class="header">
+  <h1 class="app-title">Каталог фильмов</h1>
+  <app-movie-search (search)="onSearch($event)"></app-movie-search>
+</div>
+
 <div class="movie-list">
   @if (isLoading) {
-    <p>Загрузка фильмов...</p>
+    <p class="loading">Загрузка фильмов...</p>
   }
 
   @if (error) {

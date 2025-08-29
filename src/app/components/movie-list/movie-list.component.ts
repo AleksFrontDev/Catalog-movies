@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Movie } from '../../models/movie';
 import { CommonModule } from '@angular/common';
 import { MovieModalComponent } from '../movie-modal/movie-modal.component';
+import { MovieSearchComponent } from "../components/movie-search/movie-search.component";
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, MovieModalComponent],
+  imports: [CommonModule, MovieModalComponent, MovieSearchComponent],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css'
 })
@@ -46,5 +47,30 @@ export class MovieListComponent implements OnInit {
   closeMovieModal() {
     this.isModalVisible = false;
     this.selectedMovie = null;
+  }
+
+  onSearch(searchQuery: string) {
+    if (!searchQuery.trim()) {
+      this.loadMovieList();
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.movies$ = this.movieService.getMovies().pipe(
+      map(movies => {
+        const filteredMovies = movies.filter(movie =>
+          movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
+        this.isLoading = false;
+        return filteredMovies;
+      }),
+      catchError(error => {
+        this.error = error.message;
+        this.isLoading = false;
+        return of([]);
+      })
+    );
   }
 }
