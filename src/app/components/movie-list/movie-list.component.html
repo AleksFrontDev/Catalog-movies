@@ -11,13 +11,19 @@
 
   @if (movies$ | async; as movies) {
     <div class="movies-container">
-      @for (movie of movies; track movie.id) {
-        <div class="movie-item">
-          <h3>{{ movie.title }}</h3>
-          <p>Год: {{ movie.year }}</p>
-          <p>Рейтинг: {{ movie.rating }}</p>
+    @for (movie of movies; track movie.id) {
+        <div class="movie-item" (click)="openMovieModal(movie)">
+            <h3>{{ movie.title }}</h3>
+            <p>Год: {{ movie.year }}</p>
+            <p>Рейтинг: {{ movie.rating }}</p>
         </div>
-      }
+    }
     </div>
   }
 </div>
+
+<app-movie-modal
+  [movie]="selectedMovie"
+  [isVisible]="isModalVisible"
+  (close)="closeMovieModal()">
+</app-movie-modal>

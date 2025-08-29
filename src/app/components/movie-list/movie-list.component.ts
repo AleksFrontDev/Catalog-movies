@@ -3,11 +3,12 @@ import { MovieService } from '../../services/movie.service';
 import { Observable } from 'rxjs';
 import { Movie } from '../../models/movie';
 import { CommonModule } from '@angular/common';
+import { MovieModalComponent } from '../movie-modal/movie-modal.component';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MovieModalComponent],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css'
 })
@@ -15,6 +16,8 @@ export class MovieListComponent implements OnInit {
   movies$!: Observable<Movie[]>;
   isLoading = true
   error: string | null = null
+  selectedMovie: Movie | null = null;
+  isModalVisible = false;
 
   constructor(private movieService: MovieService) {
   }
@@ -33,5 +36,15 @@ export class MovieListComponent implements OnInit {
         this.isLoading = false;
       },
     })
+  }
+
+  openMovieModal(movie: Movie) {
+    this.selectedMovie = movie;
+    this.isModalVisible = true;
+  }
+
+  closeMovieModal() {
+    this.isModalVisible = false;
+    this.selectedMovie = null;
   }
 }

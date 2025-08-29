@@ -1,0 +1,30 @@
+@if (isVisible) {
+  <div class="modal-overlay" (click)="onOverlayClick($event)">
+    @if (movie) {
+      <div class="modal-content" (click)="onContentClick($event)">
+        <button class="modal-close" (click)="closeModal()">×</button>
+
+        <div class="modal-header">
+          <img [src]="movie.poster" [alt]="movie.title" class="modal-poster">
+          <div class="modal-info">
+            <h2 class="modal-title">{{ movie.title }} ({{ movie.year }})</h2>
+            <p class="movie-director">Режиссер: {{ movie.director }}</p>
+            <p class="movie-rating">Рейтинг: {{ movie.rating }}/10</p>
+            <p class="movie-duration">Длительность: {{ movie.duration }} мин.</p>
+          </div>
+        </div>
+
+        <div class="modal-body">
+          <h3>Описание</h3>
+          <p class="movie-description">{{ movie.description }}</p>
+
+          <div class="movie-genres">
+            @for (genre of movie.genre; track genre) {
+              <span class="genre-tag">{{ genre }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}
